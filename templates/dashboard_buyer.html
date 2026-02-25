@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 style="margin-bottom: 2rem;"><i class="fas fa-shopping-basket" style="color: var(--primary-color);"></i> Buyer
+    Dashboard</h2>
+
+<div class="grid-2" style="grid-template-columns: 1fr 3fr; align-items: start;">
+    <!-- Sidebar -->
+    <div class="card" style="padding: 1rem;">
+        <div
+            style="text-align: center; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #E5E7EB;">
+            <div
+                style="width: 64px; height: 64px; background: #E5E7EB; border-radius: 50%; margin: 0 auto 0.5rem; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-user fa-2x" style="color: #9CA3AF;"></i>
+            </div>
+            <h4>{{ user.username }}</h4>
+            <span style="font-size: 0.85rem; color: var(--text-light);">Buyer Account</span>
+        </div>
+        <ul style="list-style: none;">
+            <li style="margin-bottom: 1rem;">
+                <a href="#"
+                    style="color: var(--primary-color); font-weight: 600; text-decoration: none; display: flex; align-items: center;">
+                    <i class="fas fa-box" style="width: 24px;"></i> My Orders
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'product_list' %}"
+                    style="color: var(--text-dark); text-decoration: none; display: flex; align-items: center;">
+                    <i class="fas fa-search" style="width: 24px;"></i> Browse Market
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="card">
+        <h3 style="margin-bottom: 1.5rem;">Recent Orders</h3>
+        {% if orders %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Farmer</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for o in orders %}
+                <tr>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <!-- Placeholder Icon -->
+                            <div style="width: 32px; height: 32px; background: #E5E7EB; border-radius: 4px;"></div>
+                            {{ o.product.name }}
+                        </div>
+                    </td>
+                    <td>{{ o.product.seller.username }}</td>
+                    <td>₹{{ o.total_price }}</td>
+                    <td>
+                        {% if o.status == 'Accepted' %}
+                        <span class="status-badge status-accepted">Accepted</span>
+                        {% else %}
+                        <span class="status-badge status-pending">{{ o.status }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div style="font-size: 0.85rem;">
+                            {% if o.delivery_choice == 'Home Delivery' %}
+                            <strong style="color: #e67e22;"><i class="fas fa-truck"></i> Home Delivery</strong><br>
+                            {% else %}
+                            <strong style="color: #27ae60;"><i class="fas fa-walking"></i> Pickup from Farm</strong><br>
+                            {% endif %}
+
+                            {% if o.status == 'Accepted' %}
+                            {% if o.delivery_choice == 'Pickup' %}
+                            <strong>Location:</strong> {{ o.product.seller.profile.location|default:"N/A" }}<br>
+                            {% if o.product.latitude and o.product.longitude %}
+                            <a href="https://www.google.com/maps?q={{ o.product.latitude }},{{ o.product.longitude }}"
+                                target="_blank" class="btn-secondary"
+                                style="padding: 0.2rem 0.5rem; font-size: 0.75rem;"><i
+                                    class="fas fa-map-marked-alt"></i> Navigate to Farm</a><br>
+                            {% endif %}
+                            {% endif %}
+                            <strong>Farmer Email:</strong> {{ o.product.seller.email }}<br>
+                            <strong>Phone:</strong> {{ o.product.seller.profile.phone_number|default:"N/A" }}
+                            {% else %}
+                            <span style="color: var(--text-light); font-size: 0.85rem; font-style: italic;">Contact
+                                details hidden until accepted</span>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div style="text-align: center; padding: 2rem;">
+            <p style="margin-bottom: 1rem;">No orders found.</p>
+            <a href="{% url 'product_list' %}" class="btn">Shop Now</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

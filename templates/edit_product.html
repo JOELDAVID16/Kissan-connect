@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="margin-bottom: 2rem;">Edit Listing: {{ product.name }}</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="grid-2" style="grid-template-columns: 1fr 2fr 1fr; gap: 1.5rem;">
+
+        <!-- Left Column: Current Image & Location -->
+        <div class="card">
+            <h4 style="margin-bottom: 1rem;">Product Image</h4>
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}"
+                style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+            {% endif %}
+            <div
+                style="background: #F3F4F6; border: 2px dashed #D1D5DB; border-radius: 8px; padding: 1rem; text-align: center; margin-bottom: 1.5rem; cursor: pointer;">
+                <p style="font-size: 0.8rem; color: #6B7280;">Change image</p>
+                <input type="file" name="image"
+                    style="display: block; margin-top: 10px; font-size: 0.8rem; width: 100%;">
+            </div>
+
+            <h4 style="margin-bottom: 1rem;">Current Location</h4>
+            <!-- Interactive Map -->
+            <div id="map"
+                style="background: #E5E7EB; height: 250px; border-radius: 8px; position: relative; overflow: hidden; margin-bottom: 0.5rem;">
+                <p style="text-align: center; padding-top: 100px; color: #6B7280;">Loading Map...</p>
+            </div>
+
+            <!-- Hidden inputs for coordinates -->
+            <input type="hidden" name="latitude" id="lat" value="{{ product.latitude|default:'' }}">
+            <input type="hidden" name="longitude" id="lng" value="{{ product.longitude|default:'' }}">
+
+            <p style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-light);">
+                <i class="fas fa-info-circle"></i> Drag the marker to refine your farm location.
+            </p>
+            <button type="button" onclick="getCurrentLocation()" class="btn-secondary"
+                style="width: 100%; font-size: 0.8rem; padding: 0.5rem;">
+                <i class="fas fa-location-arrow"></i> Use My Current Location
+            </button>
+        </div>
+
+        <!-- Middle Column: Product Form -->
+        <div class="card">
+            <h4 style="margin-bottom: 1rem;">Product Details</h4>
+
+            <label>Product Name</label>
+            <input type="text" name="name" value="{{ product.name }}" required>
+
+            <label>Variety</label>
+            <input type="text" name="variety" value="{{ product.variety }}" placeholder="e.g. Sona Masuri, Alphonso">
+
+            <label>Description</label>
+            <textarea name="description"
+                style="width: 100%; height: 80px; padding: 0.75rem; border: 1px solid #D1D5DB; border-radius: 8px; margin-bottom: 1rem;">{{ product.description }}</textarea>
+
+            <div class="grid-2" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div>
+                    <label>Quantity (kg)</label>
+                    <input type="number" name="quantity_kg" value="{{ product.quantity_kg }}" required>
+                </div>
+                <div>
+                    <label>Quality</label>
+                                    <select name="quality" class="form-control">
+    <option value="Low" {% if product.quality == "Low" %}selected{% endif %}>Low</option>
+    <option value="Medium" {% if product.quality == "Medium" %}selected{% endif %}>Medium</option>
+    <option value="High" {% if product.quality == "High" %}selected{% endif %}>High</option>
+</select>
+
+                </div>
+            </div>
+
+            <label>Unit Price (per kg)</label>
+            <input type="text" name="price_per_kg" value="{{ product.price_per_kg }}" required>
+
+            <div style="margin-top: 1.5rem; padding: 1rem; background: #f9fafb; border-radius: 8px;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 600;">
+                    <input type="checkbox" name="home_delivery_available" value="true" {% if
+                        product.home_delivery_available %}checked style="width: auto; margin-bottom: 0;">
+                    Home Delivery Available
+                </label>
+                <p style="font-size: 0.8rem; color: #6B7280; margin-top: 0.5rem; margin-left: 1.5rem;">
+                    Checking this allows buyers to request delivery to their address.
+                </p>
+            </div>
+
+            <!-- Bidding Section -->
+            <div
+                style="margin-top: 1rem; padding: 1rem; background: #fffbeb; border: 1px solid #fef3c7; border-radius: 8px;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 600;">
+                    <input type="checkbox" name="is_bidding_enabled" id="is_bidding_enabled" value="true" {% if
+                        product.is_bidding_enabled %}checked style="width: auto; margin-bottom: 0;">
+                    Enable Bidding
+                </label>
+                <p style="font-size: 0.8rem; color: #92400e; margin-top: 0.5rem; margin-left: 1.5rem;">
+                    Allow buyers to bid for a limited time.
+                </p>
+
+                <div id="bidding_fields"
+                    style="display: {% if product.is_bidding_enabled %}block{% else %}none{% endif %}; margin-top: 1rem; margin-left: 1.5rem;">
+                    <label>Starting Bid (₹)</label>
+                    <input type="number" step="0.01" name="starting_bid" value="{{ product.starting_bid|default:'' }}"
+                        placeholder="e.g. 20">
+
+                    <label>Add Bidding Time (from now)</label>
+                    <div style="display: flex; gap: 10px;">
+                        <div style="flex: 1;">
+                            <input type="number" name="bidding_duration_hours" min="0" placeholder="Hours" value="0">
+                        </div>
+                        <div style="flex: 1;">
+                            <input type="number" name="bidding_duration_minutes" min="0" max="59" placeholder="Minutes"
+                                value="0">
+                        </div>
+                    </div>
+                    <p style="font-size: 0.75rem; color: #92400e; margin-top: 0.5rem;">
+                        Current End: {{ product.bid_end_time|date:"M d, H:i"|default:"Not set" }}
+                    </p>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; text-align: right;">
+                <a href="{% url 'dashboard' %}" class="btn btn-secondary"
+                    style="margin-right: 10px; display: inline-block; text-decoration: none;">Cancel</a>
+                <button type="submit" class="btn">Update Listing</button>
+            </div>
+        </div>
+
+        <!-- Right Column: Info -->
+        <div>
+            <div class="card">
+                <h4 style="margin-bottom: 1rem;">Editing Tips</h4>
+                <ul style="list-style: none; font-size: 0.9rem; color: var(--text-light);">
+                    <li style="margin-bottom: 0.75rem;"><i class="fas fa-info-circle"
+                            style="color: var(--primary-color);"></i> Updating quantity? Make sure it's accurate for
+                        buyers.</li>
+                    <li style="margin-bottom: 0.75rem;"><i class="fas fa-info-circle"
+                            style="color: var(--primary-color);"></i> Delivery options help reach more customers.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</form>
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<style>
+    #map {
+        cursor: crosshair;
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+    let map;
+    let marker;
+
+    function initMap() {
+        const latVal = document.getElementById('lat').value;
+        const lngVal = document.getElementById('lng').value;
+
+        const initialLat = parseFloat(latVal) || 20.5937;
+        const initialLng = parseFloat(lngVal) || 78.9629;
+        const initialPos = [initialLat, initialLng];
+
+        map = L.map('map').setView(initialPos, latVal ? 15 : 12);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        marker = L.marker(initialPos, {
+            draggable: true,
+            title: "Your farm location"
+        }).addTo(map);
+
+        // Update coordinates when marker is dragged
+        marker.on('dragend', function (e) {
+            const pos = marker.getLatLng();
+            document.getElementById('lat').value = pos.lat.toFixed(6);
+            document.getElementById('lng').value = pos.lng.toFixed(6);
+        });
+
+        // Update coordinates and marker when map is clicked
+        map.on('click', function (e) {
+            marker.setLatLng(e.latlng);
+            document.getElementById('lat').value = e.latlng.lat.toFixed(6);
+            document.getElementById('lng').value = e.latlng.lng.toFixed(6);
+        });
+
+        // Clear "Loading Map..." text
+        document.getElementById('map').innerHTML = '';
+        setTimeout(() => map.invalidateSize(), 100);
+    }
+
+    function getCurrentLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const pos = [position.coords.latitude, position.coords.longitude];
+
+                    if (marker) marker.setLatLng(pos);
+                    if (map) {
+                        map.setView(pos, 15);
+                    }
+                    document.getElementById('lat').value = position.coords.latitude.toFixed(6);
+                    document.getElementById('lng').value = position.coords.longitude.toFixed(6);
+                },
+                () => {
+                    alert("Error: The Geolocation service failed.");
+                }
+            );
+        } else {
+            alert("Error: Your browser doesn't support geolocation.");
+        }
+    }
+
+    // Initialize map on load
+    window.addEventListener('load', () => {
+        initMap();
+
+        // Show/Hide bidding fields
+        const biddingCheckbox = document.getElementById('is_bidding_enabled');
+        const biddingFields = document.getElementById('bidding_fields');
+        if (biddingCheckbox) {
+            biddingCheckbox.addEventListener('change', function () {
+                biddingFields.style.display = this.checked ? 'block' : 'none';
+            });
+        }
+    });
+</script>
+{% endblock %}

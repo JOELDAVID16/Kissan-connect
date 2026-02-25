@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div
+    style="display: flex; min-height: 80vh; background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow);">
+    <!-- Left Side: Image -->
+    <div
+        style="flex: 1; background: url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') center/cover; display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; color: white;">
+        <div style="background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; backdrop-filter: blur(5px);">
+            <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Connect. Bid. Prosper.</h2>
+            <p>Join thousands of farmers and buyers in the new agricultural revolution.</p>
+        </div>
+    </div>
+
+    <!-- Right Side: Form -->
+    <div style="flex: 1; padding: 3rem; display: flex; flex-direction: column; justify-content: center;">
+        <h2 style="margin-bottom: 0.5rem; color: var(--primary-dark);">Welcome Back</h2>
+        <p style="color: var(--text-light); margin-bottom: 2rem;">Please login to your account</p>
+
+        <form method="post">
+            {% csrf_token %}
+            {% if form.errors %}
+            <div style="color: red; margin-bottom: 10px;">
+                <p>Invalid username or password.</p>
+            </div>
+            {% endif %}
+
+            <label>Username</label>
+            {{ form.username }}
+
+            <label>Password</label>
+            {{ form.password }}
+
+            <div
+                style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem;">
+                <label style="margin:0; display:flex; align-items:center;">
+                    <input type="checkbox" style="width:auto; margin-right:0.5rem;"> Remember me
+                </label>
+                <a href="#" style="color: var(--primary-color); text-decoration: none;">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn" style="width: 100%;">Login</button>
+        </form>
+
+        <p style="margin-top: 2rem; text-align: center; color: var(--text-light);">
+            New to Kissan Connect? <a href="{% url 'register' %}"
+                style="color: var(--primary-color); font-weight: 600;">Sign Up</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

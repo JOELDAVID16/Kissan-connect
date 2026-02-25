@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="margin-bottom: 2rem;">Marketplace: Fresh Harvest</h2>
+
+<!-- Search Bar -->
+<div class="card" style="margin-bottom: 2rem;">
+    <form method="get" style="display: flex; gap: 10px;">
+        <input type="text" name="q" placeholder="Search for tomatoes, rice, wheat..."
+            style="margin-bottom: 0; flex: 1;">
+        <button type="submit" class="btn"><i class="fas fa-search"></i> Search</button>
+    </form>
+</div>
+
+<!-- Grid -->
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;">
+    {% for p in products %}
+    <div class="card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+        <div style="height: 180px; width: 100%; background: #F3F4F6; position: relative;">
+            {% if p.image %}
+            <img src="{{ p.image.url }}" alt="{{ p.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+            {% else %}
+            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #9CA3AF;">
+                <i class="fas fa-leaf fa-3x"></i>
+            </div>
+            {% endif %}
+            <div
+                style="position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; color: var(--primary-dark);">
+                {{ p.quality }} Quality
+            </div>
+            {% if p.is_bidding_enabled %}
+            <div
+                style="position: absolute; top: 10px; left: 10px; background: #fbbf24; color: #78350f; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">
+                <i class="fas fa-gavel"></i> Bidding
+            </div>
+            {% endif %}
+        </div>
+
+        <div style="padding: 1.5rem; flex: 1; display: flex; flex-direction: column;">
+            <h3 style="margin-bottom: 0.5rem;">{{ p.name }}</h3>
+            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem; flex: 1;">
+                {{ p.description|truncatechars:60 }}
+            </p>
+
+            <div>
+                {% if p.is_bidding_enabled %}
+                {% with highest_bid=p.get_current_highest_bid %}
+                <p style="font-size: 1.2em; color: #d97706;">
+                    <i class="fas fa-gavel"></i> Current:
+                    {% if highest_bid %}
+                    ₹<span>{{ highest_bid.amount }}</span>
+                    {% else %}
+                    ₹<span>{{ p.starting_bid|default:p.price_per_kg }}</span>
+                    {% endif %}
+                </p>
+                <p style="font-size: 0.8rem; color: #92400e;">
+                    Ends: <span class="bidding-countdown" data-endtime="{{ p.bid_end_time|date:'U' }}">{{
+                        p.bid_end_time|date:"M d, H:i" }}</span>
+                </p>
+                {% endwith %}
+                {% else %}
+                <p style="font-size: 1.5em; color: #27ae60;">₹<span>{{ p.price_per_kg }}</span> / kg</p>
+                {% endif %}
+            </div>
+            <div style="font-size: 0.85rem; color: var(--text-light);">
+                <i class="fas fa-map-marker-alt"></i> {{ p.seller.profile.location|default:"Farm" }}
+            </div>
+        </div>
+
+        <a href="{% url 'product_detail' p.id %}" class="btn"
+            style="text-align: center; background-color: var(--primary-dark);">
+            View & Buy
+        </a>
+    </div>
+    {% empty %}
+    <div style="grid-column: 1 / -1; text-align: center; padding: 4rem; color: var(--text-light);">
+        <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+        <p>No products found matching your search.</p>
+        <a href="{% url 'product_list' %}" style="color: var(--primary-color); font-weight: 600;">Clear Filters</a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

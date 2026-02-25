@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Confirm Purchase</h2>
+<div class="card">
+    <h3>{{ product.name }}</h3>
+    <p>Price: ₹{{ product.price_per_kg }}/kg</p>
+    <form method="post">
+        {% csrf_token %}
+        <label>Quantity (kg) to buy:</label>
+        <input type="number" name="quantity" step="0.1" max="{{ product.quantity_kg }}" required>
+
+        <label>Delivery Method:</label>
+        <select name="delivery_choice" id="deliveryChoice" onchange="toggleAddress()" required>
+            <option value="Pickup">Buyer Pickup (See farm location)</option>
+            {% if product.home_delivery_available %}
+            <option value="Home Delivery">Home Delivery (Provide your address)</option>
+            {% endif %}
+        </select>
+
+        <div id="addressSection" style="display: none; margin-top: 1rem;">
+            <label>Delivery Address & Contact Details:</label>
+            <textarea name="delivery_address" placeholder="Enter your full address and phone number for the farmer."
+                style="width: 100%; height: 80px; padding: 0.5rem; border-radius: 4px; border: 1px solid #ccc; margin-bottom: 1rem;"></textarea>
+
+            <label>Pin Delivery Location on Map:</label>
+            <div id="map"
+                style="background: #E5E7EB; height: 250px; border-radius: 8px; position: relative; overflow: hidden; margin-bottom: 0.5rem;">
+                <p style="text-align: center; padding-top: 100px; color: #6B7280;">Loading Map...</p>
+            </div>
+
+            <input type="hidden" name="delivery_lat" id="lat">
+            <input type="hidden" name="delivery_lng" id="lng">
+
+            <button type="button" onclick="getCurrentLocation()" class="btn-secondary"
+                style="width: 100%; font-size: 0.8rem; padding: 0.5rem; margin-bottom: 1rem;">
+                <i class="fas fa-location-arrow"></i> Use My Current Location
+            </button>
+        </div>
+
+        <button type="submit" class="btn" style="margin-top: 1rem;">Confirm Order</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<style>
+    #map {
+        cursor: crosshair;
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+    let map;
+    let marker;
+
+    function initMap() {
+        // Default to India center if no coordinate provided
+        const initialPos = [20.5937, 78.9629];
+
+        map = L.map('map').setView(initialPos, 12);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        marker = L.marker(initialPos, {
+            draggable: true,
+            title: "Pin your delivery location"
+        }).addTo(map);
+
+        // Update coordinates when marker is dragged
+        marker.on('dragend', function (e) {
+            const pos = marker.getLatLng();
+            document.getElementById('lat').value = pos.lat.toFixed(6);
+            document.getElementById('lng').value = pos.lng.toFixed(6);
+        });
+
+        // Update coordinates and marker when map is clicked
+        map.on('click', function (e) {
+            marker.setLatLng(e.latlng);
+            document.getElementById('lat').value = e.latlng.lat.toFixed(6);
+            document.getElementById('lng').value = e.latlng.lng().lng.toFixed(6);
+        });
+
+        // Clear "Loading Map..." text
+        document.getElementById('map').innerHTML = '';
+        setTimeout(() => map.invalidateSize(), 100);
+    }
+
+    function getCurrentLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const pos = [position.coords.latitude, position.coords.longitude];
+
+                    if (marker) marker.setLatLng(pos);
+                    if (map) {
+                        map.setView(pos, 15);
+                    }
+                    document.getElementById('lat').value = position.coords.latitude.toFixed(6);
+                    document.getElementById('lng').value = position.coords.longitude.toFixed(6);
+                },
+                () => {
+                    alert("Error: The Geolocation service failed.");
+                }
+            );
+        } else {
+            alert("Error: Your browser doesn't support geolocation.");
+        }
+    }
+
+    function toggleAddress() {
+        const choice = document.getElementById('deliveryChoice').value;
+        const addressSection = document.getElementById('addressSection');
+        if (choice === 'Home Delivery') {
+            addressSection.style.display = 'block';
+            // Initialize map if it hasn't been yet, or invalidate size
+            if (!map) {
+                initMap();
+            } else {
+                setTimeout(() => map.invalidateSize(), 10);
+            }
+        } else {
+            addressSection.style.display = 'none';
+        }
+    }
+
+    // Initialize map check on load is not needed here as it's triggered by toggleAddress
+    // but we can pre-init if needed. Better to wait for toggle.
+</script>
+{% endblock %}

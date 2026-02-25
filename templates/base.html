@@ -1,0 +1,105 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kissan Connect</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <header class="navbar">
+        <a href="{% url 'home' %}" class="brand">
+            <i class="fas fa-leaf"></i> Kissan Connect
+        </a>
+        <nav class="nav-links">
+            <a href="{% url 'home' %}">{% trans "Home" %}</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'dashboard' %}">{% trans "Orders" %}</a>
+            <a href="{% url 'chat_list' %}">{% trans "Messages" %}</a>
+            {% if user.profile.is_farmer %}
+            <a href="{% url 'add_product' %}">{% trans "Sell Produce" %}</a>
+            {% else %}
+            <a href="{% url 'product_list' %}">{% trans "Marketplace" %}</a>
+            {% endif %}
+            <span class="user-greeting">{% trans "Hello" %}, {{ user.username }}</span>
+            <a href="{% url 'logout' %}" class="btn-nav">Log out</a>
+            {% else %}
+            <a href="{% url 'login' %}">{% trans "Login" %}</a>
+            <a href="{% url 'register' %}" class="btn-nav">{% trans "Sign Up" %}</a>
+            {% endif %}
+
+            <form action="{% url 'set_language' %}" method="post" class="language-form">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}">
+                <select name="language" onchange="this.form.submit()" class="language-select">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                    <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+    {{ language.name }}
+</option>
+
+
+                    {% endfor %}
+                </select>
+            </form>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i> {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer style="text-align: center; padding: 2rem; color: #6B7280;">
+        <p>&copy; 2026 Kissan Connect. Empowering Farmers.</p>
+    </footer>
+    <script>
+        function updateAllCountdowns() {
+            document.querySelectorAll('.bidding-countdown').forEach(function (el) {
+                const endTimestamp = el.getAttribute('data-endtime');
+                if (!endTimestamp) return;
+
+                const endTime = parseInt(endTimestamp) * 1000;
+                const now = new Date().getTime();
+                const diff = endTime - now;
+
+                if (diff <= 0) {
+                    el.innerHTML = "Ended";
+                    el.style.color = "#ef4444";
+                    return;
+                }
+
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+                el.innerHTML = `${hours}h ${mins}m ${secs}s`;
+            });
+        }
+        setInterval(updateAllCountdowns, 1000);
+        document.addEventListener('DOMContentLoaded', updateAllCountdowns);
+        updateAllCountdowns(); // Also run immediately
+    </script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="display: flex; gap: 30px;">
+    <div style="flex: 1;">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" style="max-width: 100%; border-radius: 8px;">
+        {% else %}
+        <div style="width: 100%; height: 300px; background: #eee; border-radius: 8px;"></div>
+        {% endif %}
+    </div>
+    <div style="flex: 1;">
+        <h2>{{ product.name }}</h2>
+        {% if product.variety %}
+        <p style="color: var(--text-light); font-size: 1rem; margin-bottom: 0.5rem;">
+            <strong>Variety:</strong> {{ product.variety }}
+        </p>
+        {% endif %}
+        <p>Sold by: {{ product.seller.username }}</p>
+        <div style="margin: 15px 0;">
+            <span class="tag tag-{{ demand|lower }}">Market Demand: {{ demand }}</span>
+        </div>
+        <p style="font-size: 1.5em; color: #27ae60;">₹<span>{{ product.price_per_kg }}</span> / kg</p>
+        <p>Available: {{ product.quantity_kg }} kg</p>
+        <p>Quality: {{ product.quality }}</p>
+        <p>{{ product.description }}</p>
+
+        {% if product.is_bidding_enabled %}
+        <div class="card" style="background: #fffbeb; border: 1px solid #fef3c7; padding: 1.5rem; margin: 1.5rem 0;">
+            <h4 style="color: #92400e; margin-bottom: 1rem;"><i class="fas fa-gavel"></i> Bidding Live</h4>
+            {% with highest_bid=product.get_current_highest_bid %}
+            <p style="font-size: 1.5rem; font-weight: 700; color: #d97706; margin-bottom: 0.5rem;">
+                Current Bid:
+                <span id="current-bid-amount">
+                    {% if highest_bid %}
+                    ₹{{ highest_bid.amount }}
+                    {% else %}
+                    ₹{{ product.starting_bid|default:product.price_per_kg }}
+                    {% endif %}
+                </span>
+            </p>
+
+            <p style="font-weight: 600; color: #b45309; margin-bottom: 1rem;">
+                Time Remaining: <span class="bidding-countdown" data-endtime="{{ product.bid_end_time|date:'U' }}">{{
+                    product.bid_end_time|date:"H\h i\m s\s"|default:"Calculating..." }}</span>
+            </p>
+
+            <form action="{% url 'place_bid' product.id %}" method="post"
+                style="display: flex; gap: 10px; margin-top: 1rem;">
+                {% csrf_token %}
+                <input type="number" step="0.01" name="amount" placeholder="Your bid ₹" required
+                    style="flex: 1; margin-bottom: 0;">
+                <button type="submit" class="btn" style="background: #d97706;">Place Bid</button>
+            </form>
+            {% endwith %}
+        </div>
+
+        {% else %}
+        <a href="{% url 'order_product' product.id %}" class="btn">Buy Now</a>
+        {% endif %}
+        <a href="{% url 'start_chat' product.seller.id %}" class="btn btn-secondary">Chat with Farmer</a>
+    </div>
+</div>
+{% endblock %}

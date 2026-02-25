@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div
+    style="display: flex; min-height: 80vh; background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow);">
+    <!-- Left Side: Image -->
+    <div
+        style="flex: 1; background: url('/media/product_images/community.jpg') center/cover; display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; color: white;">
+        <div style="background: rgba(0,0,0,0.4); padding: 1.5rem; border-radius: 12px; backdrop-filter: blur(5px);">
+            <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Join the Community</h2>
+            <p>Start your journey with Kissan Connect today. Fair prices, better future.</p>
+        </div>
+    </div>
+
+    <!-- Right Side: Form -->
+    <div
+        style="flex: 1; padding: 3rem; display: flex; flex-direction: column; justify-content: center; overflow-y: auto;">
+        <h2 style="margin-bottom: 0.5rem; color: var(--primary-dark);">Create Account</h2>
+        <p style="color: var(--text-light); margin-bottom: 2rem;">Sign up to get started</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <div style="max-height: 400px; overflow-y: auto; padding-right: 5px;">
+                {% for field in form %}
+                <label style="margin-top: 10px;">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                <small style="color: grey; display: block; margin-bottom: 5px;">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                <p style="color: red; font-size: 0.8rem;">{{ error }}</p>
+                {% endfor %}
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn" style="width: 100%; margin-top: 1.5rem;">Sign Up</button>
+        </form>
+
+        <p style="margin-top: 2rem; text-align: center; color: var(--text-light);">
+            Already have an account? <a href="{% url 'login' %}"
+                style="color: var(--primary-color); font-weight: 600;">Login</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

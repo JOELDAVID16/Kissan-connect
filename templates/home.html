@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div
+    style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1495107334309-fcf20504a5ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; border-radius: 12px; padding: 4rem 2rem; color: white; text-align: center; margin-bottom: 3rem;">
+    <h1 style="font-size: 3rem; font-weight: 700; margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">{% trans "Connect. Bid. Prosper." %}</h1>
+    <p style="font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+        {% trans "Your direct farm-fresh produce marketplace. Fair prices, empowered farmers, and sustainable communities." %}
+    </p>
+    <div>
+        {% if user.is_authenticated %}
+        <a href="{% url 'dashboard' %}" class="btn" style="font-size: 1.2rem;">{% trans "Go to Orders" %}</a>
+        {% else %}
+        <a href="{% url 'register' %}?role=farmer" class="btn"
+            style="margin-right: 1rem; box-shadow: 0 4px 14px rgba(0,0,0,0.4);">{% trans "I'm a Farmer" %}</a>
+        <a href="{% url 'register' %}?role=buyer" class="btn"
+            style="margin-right: 1rem; box-shadow: 0 4px 14px rgba(0,0,0,0.4);">{% trans "I'm a Buyer" %}</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="grid-2">
+    <div class="card">
+        <h2 style="color: var(--primary-dark); margin-bottom: 0.5rem;"><i class="fas fa-tractor"></i> {% trans "For Farmers" %}</h2>
+        <p style="color: var(--text-light); margin-bottom: 1.5rem;">
+            {% trans "List your harvest, get AI-powered price suggestions, and connect directly with buyers. No middlemen." %}
+        </p>
+        <ul style="list-style: none; margin-bottom: 1.5rem;">
+            <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                    style="color: var(--primary-color); margin-right: 10px;"></i> {% trans "Instant Listing" %}</li>
+            <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                    style="color: var(--primary-color); margin-right: 10px;"></i> {% trans "Smart Pricing" %}</li>
+            <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                    style="color: var(--primary-color); margin-right: 10px;"></i> {% trans "Secure Orders" %}</li>
+        </ul>
+        <a href="{% url 'register' %}?role=farmer" class="btn" style="width: 100%; text-align: center;">{% trans "Start Selling" %}</a>
+    </div>
+
+    <div class="card">
+        <h2 style="color: var(--primary-dark); margin-bottom: 0.5rem;"><i class="fas fa-shopping-basket"></i> {% trans "For Buyers" %}</h2>
+        <p style="color: var(--text-light); margin-bottom: 1.5rem;">
+            {% trans "Browse fresh local produce, view demand trends, and buy directly from the source." %}
+        </p>
+        <ul style="list-style: none; margin-bottom: 1.5rem;">
+            <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                    style="color: var(--primary-color); margin-right: 10px;"></i> {% trans "Farm Fresh" %}</li>
+            <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                    style="color: var(--primary-color); margin-right: 10px;"></i> {% trans "Transparent Pricing" %}</li>
+            <li style="margin-bottom: 0.5rem;"><i class="fas fa-check"
+                    style="color: var(--primary-color); margin-right: 10px;"></i> {% trans "Direct Contact" %}</li>
+        </ul>
+        <a href="{% url 'register' %}?role=buyer" class="btn" style="width: 100%; text-align: center;">{% trans "Start Buying" %}</a>
+    </div>
+</div>
+
+<div style="margin-top: 3rem; text-align: center;">
+    <h2 style="margin-bottom: 2rem;">{% trans "Why Kissan Connect?" %}</h2>
+    <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 250px;">
+            <i class="fas fa-hand-holding-usd"
+                style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h3>{% trans "Fair Trade" %}</h3>
+            <p style="color: var(--text-light);">{% trans "Farmers get better rates, buyers get better prices." %}</p>
+        </div>
+        <div style="flex: 1; min-width: 250px;">
+            <i class="fas fa-robot" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h3>{% trans "Smart Tech" %}</h3>
+            <p style="color: var(--text-light);">{% trans "AI-driven insights for smarter business decisions." %}</p>
+        </div>
+        <div style="flex: 1; min-width: 250px;">
+            <i class="fas fa-users" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+            <h3>{% trans "Community" %}</h3>
+            <p style="color: var(--text-light);">{% trans "Building strong local agricultural networks." %}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="card">
+    <h2 class="mb-2"><i class="fas fa-comments"></i> {% trans "Your Messages" %}</h2>
+
+    {% if conversations %}
+    <div class="chat-list">
+        {% for conv in conversations %}
+        {% with other_user=conv.participants.all|dictsort:"username" %}
+        <a href="{% url 'chat_detail' conv.pk %}"
+            class="chat-item {% if conv.messages.last.is_read == False and conv.messages.last.sender != user %}unread{% endif %}">
+            <div class="chat-avatar">
+                <i class="fas fa-user-circle fa-2x"></i>
+            </div>
+            <div class="chat-info">
+                <div class="chat-header">
+                    <span class="chat-name">
+                        {% for p in conv.participants.all %}
+                        {% if p != user %}{{ p.username }}{% endif %}
+                        {% endfor %}
+                    </span>
+                    <span class="chat-time">{{ conv.messages.last.timestamp|date:"d M, H:i" }}</span>
+                </div>
+                <div class="chat-preview">
+                    {% if conv.messages.last %}
+                    {{ conv.messages.last.text|truncatechars:50 }}
+                    {% else %}
+                    <span class="text-light">{% trans "No messages yet" %}</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% if conv.messages.last.is_read == False and conv.messages.last.sender != user %}
+            <div class="unread-indicator"></div>
+            {% endif %}
+        </a>
+        {% endwith %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state" style="text-align: center; padding: 3rem;">
+        <i class="fas fa-comment-slash fa-4x" style="color: var(--text-light); opacity: 0.3;"></i>
+        <p class="mt-2" style="color: var(--text-light);">{% trans "You don't have any conversations yet." %}</p>
+        <a href="{% url 'product_list' %}" class="btn mt-2">{% trans "Browse Marketplace" %}</a>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .chat-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .chat-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        border-radius: var(--radius-sm);
+        text-decoration: none;
+        color: var(--text-dark);
+        border: 1px solid var(--border-light);
+        transition: var(--transition);
+        position: relative;
+    }
+
+    .chat-item:hover {
+        background-color: #F9FAFB;
+        border-color: var(--primary-color);
+        transform: translateX(5px);
+    }
+
+    .chat-item.unread {
+        background-color: #ECFDF5;
+        border-color: var(--primary-color);
+    }
+
+    .chat-avatar {
+        color: var(--primary-color);
+    }
+
+    .chat-info {
+        flex: 1;
+    }
+
+    .chat-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.25rem;
+    }
+
+    .chat-name {
+        font-weight: 600;
+        color: var(--text-dark);
+    }
+
+    .chat-time {
+        font-size: 0.8rem;
+        color: var(--text-light);
+    }
+
+    .chat-preview {
+        font-size: 0.9rem;
+        color: var(--text-medium);
+    }
+
+    .unread-indicator {
+        width: 10px;
+        height: 10px;
+        background-color: var(--primary-color);
+        border-radius: 50%;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+</style>
+{% endblock %}
