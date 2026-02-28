@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
 <style>
     .ai-tool-header {
@@ -64,6 +65,7 @@
         font-weight: 800;
         background: linear-gradient(45deg, var(--primary-color), #27ae60);
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
         margin: 1rem 0;
     }
@@ -123,14 +125,16 @@
 <div style="margin-bottom: 1.5rem;">
     <a href="{% url 'dashboard' %}"
         style="color: var(--primary-color); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 5px;">
-        <i class="fas fa-arrow-left"></i> Back to Orders
+        <i class="fas fa-arrow-left"></i> {% trans "Back to Orders" %}
     </a>
 </div>
 
-<div class="ai-tool-header"; style="max-width: 650px; margin: 0 auto;">
-    <h1 style="margin-bottom: 1rem; font-size: 2.5rem;"><i class="fas fa-robot"></i> Smart Price Predictor</h1>
+<div class="ai-tool-header" ; style="max-width: 650px; margin: 0 auto;">
+    <h1 style="margin-bottom: 1rem; font-size: 2.5rem;"><i class="fas fa-robot"></i> {% trans "Smart Price Predictor" %}
+    </h1>
     <p style="font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto;">
-        Our AI helps you find the most competitive market prices for your farm produce using real-time insights.
+        {% trans "Our AI helps you find the most competitive market prices for your farm produce using real-time
+        insights." %}
     </p>
 </div>
 <br>
@@ -146,10 +150,10 @@
         <div class="form-group" style="margin-bottom: 2rem;">
             <label for="quality">How is the quality?</label>
             <select name="quality" class="form-control">
-             <option value="Low" {% if product.quality == "Low" %}selected{% endif %}>Low</option>
-            <option value="Medium" {% if product.quality == "Medium" %}selected{% endif %}>Medium</option>
-            <option value="High" {% if product.quality == "High" %}selected{% endif %}>High</option>
-           </select>
+                <option value="Low" {% if product.quality=="Low" %}selected{% endif %}>Low</option>
+                <option value="Medium" {% if product.quality=="Medium" %}selected{% endif %}>Medium</option>
+                <option value="High" {% if product.quality=="High" %}selected{% endif %}>High</option>
+            </select>
         </div>
 
         <button type="submit" class="premium-btn">

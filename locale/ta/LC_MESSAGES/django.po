@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-20 11:04+0530\n"
+"POT-Creation-Date: 2026-02-26 08:24+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,37 +18,106 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\templates\base.html:22
-msgid "Home"
-msgstr "முகப்பு"
+#: .\templates\ai_price_tool.html:127
+msgid "Back to Orders"
+msgstr "ஆணைகளுக்கு திரும்பவும்"
 
-#: .\templates\base.html:24
-msgid "Dashboard"
-msgstr "டாஷ்போர்டு"
+#: .\templates\ai_price_tool.html:132
+#, fuzzy
+#| msgid "Smart Pricing"
+msgid "Smart Price Predictor"
+msgstr "ஸ்மார்ட் விலை நிர்ணயம்"
+
+#: .\templates\analytics.html:31
+msgid "Total Orders"
+msgstr ""
+
+#: .\templates\base.html:23
+msgid "Orders"
+msgstr "ஆணைகள்"
+
+#: .\templates\base.html:25
+msgid "Messages"
+msgstr "செய்திகள்"
 
 #: .\templates\base.html:26
+#: .\venv\Lib\site-packages\django\contrib\messages\apps.py:16
+
+#: .\templates\base.html:28
 msgid "Sell Produce"
 msgstr "விளைபொருட்களை விற்கவும்"
 
-#: .\templates\base.html:28
+#: .\templates\base.html:30
 msgid "Marketplace"
 msgstr "சந்தை"
 
-#: .\templates\base.html:30
+#: .\templates\base.html:32
 msgid "Hello"
 msgstr "வணக்கம்"
 
-#: .\templates\base.html:31
-msgid "Logout"
-msgstr ""
-
-#: .\templates\base.html:33
+#: .\templates\base.html:35
 msgid "Login"
 msgstr "உள்நுழை"
 
-#: .\templates\base.html:34
+#: .\templates\base.html:36
 msgid "Sign Up"
 msgstr "பதிவு செய்"
+
+#: .\templates\chat_detail.html:17
+msgid "Online"
+msgstr ""
+
+#: .\templates\chat_detail.html:32
+msgid "No messages yet. Say hello!"
+msgstr ""
+
+#: .\templates\chat_detail.html:40
+msgid "Type a message..."
+msgstr ""
+
+#: .\templates\chat_list.html:6
+msgid "Your Messages"
+msgstr "உங்கள் செய்திகள்"
+
+#: .\templates\chat_list.html:30
+msgid "No messages yet"
+msgstr ""
+
+#: .\templates\chat_list.html:44
+msgid "You don't have any conversations yet."
+msgstr ""
+
+#: .\templates\chat_list.html:45
+#, fuzzy
+#| msgid "Marketplace"
+msgid "Browse Marketplace"
+msgstr "சந்தை"
+
+#: .\templates\dashboard_buyer.html:23
+#, fuzzy
+#| msgid "Secure Orders"
+msgid "My Orders"
+msgstr "பாதுகாப்பான ஆர்டர்கள்"
+
+#: .\templates\dashboard_buyer.html:38
+#, fuzzy
+#| msgid "Secure Orders"
+msgid "Recent Orders"
+msgstr "பாதுகாப்பான ஆர்டர்கள்"
+
+#: .\templates\dashboard_buyer.html:101
+msgid "No orders found."
+msgstr ""
+
+#: .\templates\dashboard_farmer.html:16
+#, fuzzy
+#| msgid "Secure Orders"
+msgid "Received Orders"
+msgstr "பாதுகாப்பான ஆர்டர்கள்"
+
+#: .\templates\dashboard_farmer.html:87
+msgid "No orders received yet."
+msgstr ""
 
 #: .\templates\home.html:8
 msgid "Connect. Bid. Prosper."
@@ -58,11 +127,13 @@ msgstr "இணையுங்கள். ஏலம் விடுங்கள்
 msgid ""
 "Your direct farm-fresh produce marketplace. Fair prices, empowered farmers, "
 "and sustainable communities."
-msgstr "உங்கள் நேரடி பண்ணை-புதிய விளைபொருள் சந்தை. நியாயமான விலைகள், அதிகாரம் பெற்ற விவசாயிகள் மற்றும் நிலையான சமூகங்கள்."
+msgstr ""
+"உங்கள் நேரடி பண்ணை-புதிய விளைபொருள் சந்தை. நியாயமான விலைகள், அதிகாரம் பெற்ற "
+"விவசாயிகள் மற்றும் நிலையான சமூகங்கள்."
 
 #: .\templates\home.html:14
-msgid "Go to Dashboard"
-msgstr "டாஷ்போர்டுக்குச் செல்லவும்"
+msgid "Go to Orders"
+msgstr "ஆணைகளுக்குச் செல்லவும்"
 
 #: .\templates\home.html:17
 msgid "I'm a Farmer"
@@ -80,7 +151,9 @@ msgstr "விவசாயிகளுக்காக"
 msgid ""
 "List your harvest, get AI-powered price suggestions, and connect directly "
 "with buyers. No middlemen."
-msgstr "உங்கள் அறுவடையை பட்டியலிடுங்கள், AI-மூலம் இயங்கும் விலை பரிந்துரைகளைப் பெறுங்கள், மேலும் வாங்குபவர்களுடன் நேரடியாக இணையுங்கள். இடைத்தரகர்கள் இல்லை."
+msgstr ""
+"உங்கள் அறுவடையை பட்டியலிடுங்கள், AI-மூலம் இயங்கும் விலை பரிந்துரைகளைப் பெறுங்கள், மேலும் "
+"வாங்குபவர்களுடன் நேரடியாக இணையுங்கள். இடைத்தரகர்கள் இல்லை."
 
 #: .\templates\home.html:32
 msgid "Instant Listing"
@@ -106,7 +179,9 @@ msgstr "வாங்குபவர்களுக்காக"
 msgid ""
 "Browse fresh local produce, view demand trends, and buy directly from the "
 "source."
-msgstr "புதிய உள்ளூர் விளைபொருட்களை உலாவவும், தேவைப் போக்குகளைப் பார்க்கவும், மூலத்திலிருந்து நேரடியாக வாங்கவும்."
+msgstr ""
+"புதிய உள்ளூர் விளைபொருட்களை உலாவவும், தேவைப் போக்குகளைப் பார்க்கவும், மூலத்திலிருந்து "
+"நேரடியாக வாங்கவும்."
 
 #: .\templates\home.html:48
 msgid "Farm Fresh"
@@ -152,10 +227,6 @@ msgstr "சமூகம்"
 #: .\templates\home.html:75
 msgid "Building strong local agricultural networks."
 msgstr "வலுவான உள்ளூர் விவசாய நெட்வொர்க்குகளை உருவாக்குதல்."
-
-#: .\venv\Lib\site-packages\django\contrib\messages\apps.py:16
-msgid "Messages"
-msgstr ""
 
 #: .\venv\Lib\site-packages\django\contrib\sitemaps\apps.py:8
 msgid "Site Maps"
@@ -1394,6 +1465,9 @@ msgstr ""
 msgid "Django Community"
 msgstr ""
 
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:236
-msgid "Connect, get help, or contribute"
-msgstr ""
+
+#~ msgid "Dashboard"
+#~ msgstr "டாஷ்போர்டு"
+
+#~ msgid "Go to Dashboard"
+#~ msgstr "டாஷ்போர்டுக்குச் செல்லவும்"

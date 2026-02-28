@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
 <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
     <h2><i class="fas fa-tractor" style="color: var(--primary-color);"></i> Farmer Dashboard</h2>
@@ -12,17 +13,17 @@
 </div>
 
 <div class="card">
-    <h3 style="margin-bottom: 1rem; color: var(--primary-dark);">Received Orders</h3>
+    <h3 style="margin-bottom: 1rem; color: var(--primary-dark);">{% trans "Received Orders" %}</h3>
     {% if orders %}
     <table>
         <thead>
             <tr>
-                <th>Product</th>
-                <th>Buyer</th>
-                <th>Qty</th>
-                <th>Total</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th>{% trans "Product" %}</th>
+                <th>{% trans "Buyer" %}</th>
+                <th>{% trans "Qty" %}</th>
+                <th>{% trans "Total" %}</th>
+                <th>{% trans "Status" %}</th>
+                <th>{% trans "Action" %}</th>
             </tr>
         </thead>
         <tbody>
@@ -34,9 +35,9 @@
                 <td>₹{{ o.total_price }}</td>
                 <td>
                     {% if o.status == 'Pending' %}
-                    <span class="status-badge status-pending">Pending</span>
+                    <span class="status-badge status-pending">{% trans "Pending" %}</span>
                     {% elif o.status == 'Accepted' %}
-                    <span class="status-badge status-accepted">Accepted</span>
+                    <span class="status-badge status-accepted">{% trans "Accepted" %}</span>
                     {% else %}
                     <span class="status-badge">{{ o.status }}</span>
                     {% endif %}
@@ -44,35 +45,35 @@
                 <td>
                     {% if o.status == 'Pending' %}
                     <a href="{% url 'accept_order' o.id %}" class="btn"
-                        style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin-bottom: 0.5rem; display: inline-block;">Accept</a>
+                        style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin-bottom: 0.5rem; display: inline-block;">{% trans "Accept" %}</a>
                     <div style="font-size: 0.75rem; color: var(--text-light);">
                         {% if o.delivery_choice == 'Home Delivery' %}
-                        <i class="fas fa-truck"></i> Delivery Requested
+                        <i class="fas fa-truck"></i> {% trans "Delivery Requested" %}
                         {% if o.delivery_lat and o.delivery_lng %}
                         <br><a href="https://www.google.com/maps?q={{ o.delivery_lat }},{{ o.delivery_lng }}"
                             target="_blank" style="color: var(--primary-color); font-size: 0.7rem;"><i
-                                class="fas fa-map-marker-alt"></i> View on Map</a>
+                                class="fas fa-map-marker-alt"></i> {% trans "View on Map" %}</a>
                         {% endif %}
                         {% else %}
-                        <i class="fas fa-walking"></i> Pickup Requested
+                        <i class="fas fa-walking"></i> {% trans "Pickup Requested" %}
                         {% endif %}
                     </div>
                     {% elif o.status == 'Accepted' %}
                     <div style="font-size: 0.9rem; color: var(--text-light);">
                         {% if o.delivery_choice == 'Home Delivery' %}
-                        <strong style="color: #e67e22;"><i class="fas fa-truck"></i> Home Delivery</strong><br>
-                        <strong>Address:</strong> {{ o.delivery_address|default:"Not provided" }}<br>
+                        <strong style="color: #e67e22;"><i class="fas fa-truck"></i> {% trans "Home Delivery" %}</strong><br>
+                        <strong>{% trans "Address:" %}</strong> {{ o.delivery_address|default:"Not provided" }}<br>
                         {% if o.delivery_lat and o.delivery_lng %}
                         <a href="https://www.google.com/maps?q={{ o.delivery_lat }},{{ o.delivery_lng }}"
                             target="_blank" class="btn-secondary" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;"><i
-                                class="fas fa-map-marked-alt"></i> Navigate to Buyer</a><br>
+                                class="fas fa-map-marked-alt"></i> {% trans "Navigate to Buyer" %}</a><br>
                         {% endif %}
                         {% else %}
-                        <strong style="color: #27ae60;"><i class="fas fa-walking"></i> Buyer Pickup</strong><br>
-                        <strong>Location:</strong> {{ o.buyer.profile.location }}<br>
+                        <strong style="color: #27ae60;"><i class="fas fa-walking"></i> {% trans "Buyer Pickup" %}</strong><br>
+                        <strong>{% trans "Location:" %}</strong> {{ o.buyer.profile.location }}<br>
                         {% endif %}
-                        <strong>Buyer Email:</strong> {{ o.buyer.email }}<br>
-                        <strong>Phone:</strong> {{ o.buyer.profile.phone_number }}
+                        <strong>{% trans "Buyer Email:" %}</strong> {{ o.buyer.email }}<br>
+                        <strong>{% trans "Phone:" %}</strong> {{ o.buyer.profile.phone_number }}
                     </div>
                     {% endif %}
                 </td>
@@ -83,7 +84,7 @@
     {% else %}
     <div style="text-align: center; padding: 2rem; color: var(--text-light);">
         <i class="fas fa-box-open" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;"></i>
-        <p>No orders received yet.</p>
+        <p>{% trans "No orders received yet." %}</p>
     </div>
     {% endif %}
 </div>

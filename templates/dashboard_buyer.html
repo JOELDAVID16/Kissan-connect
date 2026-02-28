@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
 <h2 style="margin-bottom: 2rem;"><i class="fas fa-shopping-basket" style="color: var(--primary-color);"></i> Buyer
     Dashboard</h2>
@@ -19,7 +20,7 @@
             <li style="margin-bottom: 1rem;">
                 <a href="#"
                     style="color: var(--primary-color); font-weight: 600; text-decoration: none; display: flex; align-items: center;">
-                    <i class="fas fa-box" style="width: 24px;"></i> My Orders
+                    <i class="fas fa-box" style="width: 24px;"></i> {% trans "My Orders" %}
                 </a>
             </li>
 
@@ -34,7 +35,7 @@
 
     <!-- Main Content -->
     <div class="card">
-        <h3 style="margin-bottom: 1.5rem;">Recent Orders</h3>
+        <h3 style="margin-bottom: 1.5rem;">{% trans "Recent Orders" %}</h3>
         {% if orders %}
         <table>
             <thead>
@@ -97,7 +98,7 @@
         </table>
         {% else %}
         <div style="text-align: center; padding: 2rem;">
-            <p style="margin-bottom: 1rem;">No orders found.</p>
+            <p style="margin-bottom: 1rem;">{% trans "No orders found." %}</p>
             <a href="{% url 'product_list' %}" class="btn">Shop Now</a>
         </div>
         {% endif %}

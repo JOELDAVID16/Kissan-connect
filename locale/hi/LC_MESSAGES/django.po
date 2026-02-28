@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-20 11:04+0530\n"
+"POT-Creation-Date: 2026-02-26 08:24+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,37 +18,93 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\templates\base.html:22
-msgid "Home"
-msgstr "घर"
+#: .\templates\ai_price_tool.html:127
+msgid "Back to Orders"
+msgstr "ऑर्डर पर वापस जाएं"
 
-#: .\templates\base.html:24
-msgid "Dashboard"
-msgstr "डैशबोर्ड"
+#: .\templates\ai_price_tool.html:132
+#, fuzzy
+#| msgid "Smart Pricing"
+msgid "Smart Price Predictor"
+msgstr "स्मार्ट मूल्य निर्धारण"
 
-#: .\templates\base.html:26
+#: .\templates\analytics.html:31
+msgid "Total Orders"
+msgstr "ऑर्डर"
+
+msgid "Orders"
+msgstr "ऑर्डर"
+
+msgid "Messages"
+msgstr "संदेश"
+
 msgid "Sell Produce"
 msgstr "उपज बेचें"
 
-#: .\templates\base.html:28
 msgid "Marketplace"
-msgstr "बाज़ार"
+msgstr "बाजार"
 
-#: .\templates\base.html:30
 msgid "Hello"
 msgstr "नमस्ते"
 
-#: .\templates\base.html:31
-msgid "Logout"
-msgstr ""
+msgid "Home"
+msgstr "घर"
 
-#: .\templates\base.html:33
 msgid "Login"
-msgstr "लॉग इन"
+msgstr "लॉगिन"
 
-#: .\templates\base.html:34
 msgid "Sign Up"
 msgstr "साइन अप"
+
+#: .\templates\chat_detail.html:17
+msgid "Online"
+msgstr ""
+
+#: .\templates\chat_detail.html:32
+msgid "No messages yet. Say hello!"
+msgstr ""
+
+#: .\templates\chat_detail.html:40
+msgid "Type a message..."
+msgstr ""
+
+#: .\templates\chat_list.html:6
+msgid "Your Messages"
+msgstr ""
+
+#: .\templates\chat_list.html:30
+msgid "No messages yet"
+msgstr ""
+
+#: .\templates\chat_list.html:44
+msgid "You don't have any conversations yet."
+msgstr ""
+
+#: .\templates\chat_list.html:45
+#, fuzzy
+#| msgid "Marketplace"
+msgid "Browse Marketplace"
+msgstr "बाज़ार"
+
+#: .\templates\dashboard_buyer.html:23
+msgid "My Orders"
+msgstr "मेरे ऑर्डर"
+
+#: .\templates\dashboard_buyer.html:38
+msgid "Recent Orders"
+msgstr "हाल के ऑर्डर"
+
+#: .\templates\dashboard_buyer.html:101
+msgid "No orders found."
+msgstr "कोई ऑर्डर नहीं मिला।"
+
+#: .\templates\dashboard_farmer.html:16
+msgid "Received Orders"
+msgstr "प्राप्त ऑर्डर"
+
+#: .\templates\dashboard_farmer.html:87
+msgid "No orders received yet."
+msgstr "अभी तक कोई ऑर्डर प्राप्त नहीं हुआ है।"
 
 #: .\templates\home.html:8
 msgid "Connect. Bid. Prosper."
@@ -61,8 +117,8 @@ msgid ""
 msgstr "आपका सीधा फार्म-फ्रेश उपज बाज़ार। उचित मूल्य, सशक्त किसान और टिकाऊ समुदाय।"
 
 #: .\templates\home.html:14
-msgid "Go to Dashboard"
-msgstr "डैशबोर्ड पर जाएं"
+msgid "Go to Orders"
+msgstr "ऑर्डर पर जाएं"
 
 #: .\templates\home.html:17
 msgid "I'm a Farmer"
@@ -153,10 +209,6 @@ msgstr "समुदाय"
 #: .\templates\home.html:75
 msgid "Building strong local agricultural networks."
 msgstr "मजबूत स्थानीय कृषि नेटवर्क का निर्माण।"
-
-#: .\venv\Lib\site-packages\django\contrib\messages\apps.py:16
-msgid "Messages"
-msgstr ""
 
 #: .\venv\Lib\site-packages\django\contrib\sitemaps\apps.py:8
 msgid "Site Maps"
@@ -1398,3 +1450,9 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:236
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#~ msgid "Dashboard"
+#~ msgstr "डैशबोर्ड"
+
+#~ msgid "Go to Dashboard"
+#~ msgstr "डैशबोर्ड पर जाएं"

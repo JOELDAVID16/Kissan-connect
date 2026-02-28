@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-20 11:04+0530\n"
+"POT-Creation-Date: 2026-02-26 08:24+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,37 +18,99 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\templates\base.html:22
-msgid "Home"
-msgstr "ಮುಖಪುಟ"
+#: .\templates\ai_price_tool.html:127
+msgid "Back to Orders"
+msgstr "ಆದೇಶಗಳಿಗೆ ಹಿಂತಿರುಗಿ"
 
-#: .\templates\base.html:24
-msgid "Dashboard"
-msgstr "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್"
+#: .\templates\ai_price_tool.html:132
+#, fuzzy
+#| msgid "Smart Pricing"
+msgid "Smart Price Predictor"
+msgstr "ಸ್ಮಾರ್ಟ್ ಬೆಲೆ ನಿಗದಿ"
 
-#: .\templates\base.html:26
+#: .\templates\analytics.html:31
+msgid "Total Orders"
+msgstr "ಒಟ್ಟು ಆದೇಶಗಳು"
+
+#: .\templates\base.html:23
+msgid "Orders"
+msgstr "ಆರ್ಡರ್‌ಗಳು"
+
+#: .\templates\base.html:25
+msgid "Messages"
+msgstr "ಸಂದೇಶಗಳು"
+
+
+#: .\templates\base.html:28
 msgid "Sell Produce"
 msgstr "ಉತ್ಪನ್ನವನ್ನು ಮಾರಿ"
 
-#: .\templates\base.html:28
+#: .\templates\base.html:30
 msgid "Marketplace"
 msgstr "ಮಾರುಕಟ್ಟೆ"
 
-#: .\templates\base.html:30
+#: .\templates\base.html:32
 msgid "Hello"
 msgstr "ನಮಸ್ಕಾರ"
 
-#: .\templates\base.html:31
-msgid "Logout"
-msgstr ""
-
-#: .\templates\base.html:33
+#: .\templates\base.html:35
 msgid "Login"
 msgstr "ಲಾಗಿನ್"
 
-#: .\templates\base.html:34
+#: .\templates\base.html:36
 msgid "Sign Up"
 msgstr "ಸೈನ್ ಅಪ್"
+
+#: .\templates\chat_detail.html:17
+msgid "Online"
+msgstr ""
+
+#: .\templates\chat_detail.html:32
+msgid "No messages yet. Say hello!"
+msgstr ""
+
+#: .\templates\chat_detail.html:40
+msgid "Type a message..."
+msgstr ""
+
+#: .\templates\chat_list.html:6
+msgid "Your Messages"
+msgstr "ನಿಮ್ಮ ಸಂದೇಶಗಳು"
+
+#: .\templates\chat_list.html:30
+msgid "No messages yet"
+msgstr ""
+
+#: .\templates\chat_list.html:44
+msgid "You don't have any conversations yet."
+msgstr ""
+
+#: .\templates\chat_list.html:45
+#, fuzzy
+#| msgid "Marketplace"
+msgid "Browse Marketplace"
+msgstr "ಮಾರುಕಟ್ಟೆ"
+
+#: .\templates\dashboard_buyer.html:23
+#, fuzzy
+msgid "My Orders"
+msgstr "ನನ್ನ ಆದೇಶಗಳು"
+
+#: .\templates\dashboard_buyer.html:38
+msgid "Recent Orders"
+msgstr "ಇತ್ತೀಚಿನ ಆದೇಶಗಳು"
+
+#: .\templates\dashboard_buyer.html:101
+msgid "No orders found."
+msgstr "ಯಾವುದೇ ಆದೇಶಗಳು ಕಂಡುಬಂದಿಲ್ಲ."
+
+#: .\templates\dashboard_farmer.html:16
+msgid "Received Orders"
+msgstr "ಸ್ವೀಕರಿಸಿದ ಆದೇಶಗಳು"
+
+#: .\templates\dashboard_farmer.html:87
+msgid "No orders received yet."
+msgstr "ಇನ್ನೂ ಯಾವುದೇ ಆದೇಶಗಳು ಬಂದಿಲ್ಲ."
 
 #: .\templates\home.html:8
 msgid "Connect. Bid. Prosper."
@@ -58,11 +120,13 @@ msgstr "ಸಂಪರ್ಕಿಸಿ. ಬಿಡ್ ಮಾಡಿ. ಸಮೃದ್�
 msgid ""
 "Your direct farm-fresh produce marketplace. Fair prices, empowered farmers, "
 "and sustainable communities."
-msgstr "ನಿಮ್ಮ ನೇರ ಫಾರ್ಮ್-ಫ್ರೆಶ್ ಉತ್ಪನ್ನ ಮಾರುಕಟ್ಟೆ. ನ್ಯಾಯಯುತ ಬೆಲೆಗಳು, ಸಶಕ್ತ ರೈತರು ಮತ್ತು ಸುಸ್ಥಿರ ಸಮುದಾಯಗಳು."
+msgstr ""
+"ನಿಮ್ಮ ನೇರ ಫಾರ್ಮ್-ಫ್ರೆಶ್ ಉತ್ಪನ್ನ ಮಾರುಕಟ್ಟೆ. ನ್ಯಾಯಯುತ ಬೆಲೆಗಳು, ಸಶಕ್ತ ರೈತರು ಮತ್ತು ಸುಸ್ಥಿರ "
+"ಸಮುದಾಯಗಳು."
 
 #: .\templates\home.html:14
-msgid "Go to Dashboard"
-msgstr "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ಗೆ ಹೋಗಿ"
+msgid "Go to Orders"
+msgstr "ಆದೇಶಗಳಿಗೆ ಹೋಗಿ"
 
 #: .\templates\home.html:17
 msgid "I'm a Farmer"
@@ -80,7 +144,9 @@ msgstr "ರೈತರಿಗಾಗಿ"
 msgid ""
 "List your harvest, get AI-powered price suggestions, and connect directly "
 "with buyers. No middlemen."
-msgstr "ನಿಮ್ಮ ಸುಗ್ಗಿಯನ್ನು ಪಟ್ಟಿ ಮಾಡಿ, AI-ಚಾಲಿತ ಬೆಲೆ ಸಲಹೆಗಳನ್ನು ಪಡೆಯಿರಿ ಮತ್ತು ಖರೀದಿದಾರರೊಂದಿಗೆ ನೇರವಾಗಿ ಸಂಪರ್ಕ ಸಾಧಿಸಿ. ಮಧ್ಯವರ್ತಿಗಳಿಲ್ಲ."
+msgstr ""
+"ನಿಮ್ಮ ಸುಗ್ಗಿಯನ್ನು ಪಟ್ಟಿ ಮಾಡಿ, AI-ಚಾಲಿತ ಬೆಲೆ ಸಲಹೆಗಳನ್ನು ಪಡೆಯಿರಿ ಮತ್ತು "
+"ಖರೀದಿದಾರರೊಂದಿಗೆ ನೇರವಾಗಿ ಸಂಪರ್ಕ ಸಾಧಿಸಿ. ಮಧ್ಯವರ್ತಿಗಳಿಲ್ಲ."
 
 #: .\templates\home.html:32
 msgid "Instant Listing"
@@ -106,7 +172,9 @@ msgstr "ಖರೀದಿದಾರರಿಗಾಗಿ"
 msgid ""
 "Browse fresh local produce, view demand trends, and buy directly from the "
 "source."
-msgstr "ತಾಜಾ ಸ್ಥಳೀಯ ಉತ್ಪನ್ನಗಳನ್ನು ಬ್ರೌಸ್ ಮಾಡಿ, ಬೇಡಿಕೆಯ ಪ್ರವೃತ್ತಿಗಳನ್ನು ವೀಕ್ಷಿಸಿ ಮತ್ತು ಮೂಲದಿಂದ ನೇರವಾಗಿ ಖರೀದಿಸಿ."
+msgstr ""
+"ತಾಜಾ ಸ್ಥಳೀಯ ಉತ್ಪನ್ನಗಳನ್ನು ಬ್ರೌಸ್ ಮಾಡಿ, ಬೇಡಿಕೆಯ ಪ್ರವೃತ್ತಿಗಳನ್ನು ವೀಕ್ಷಿಸಿ ಮತ್ತು ಮೂಲದಿಂದ "
+"ನೇರವಾಗಿ ಖರೀದಿಸಿ."
 
 #: .\templates\home.html:48
 msgid "Farm Fresh"
@@ -151,10 +219,6 @@ msgstr "ಸಮೂದಾಯ"
 #: .\templates\home.html:75
 msgid "Building strong local agricultural networks."
 msgstr "ಬಲವಾದ ಸ್ಥಳೀಯ ಕೃಷಿ ಜಾಲಗಳನ್ನು ನಿರ್ಮಿಸುವುದು."
-
-#: .\venv\Lib\site-packages\django\contrib\messages\apps.py:16
-msgid "Messages"
-msgstr ""
 
 #: .\venv\Lib\site-packages\django\contrib\sitemaps\apps.py:8
 msgid "Site Maps"
@@ -1393,6 +1457,9 @@ msgstr ""
 msgid "Django Community"
 msgstr ""
 
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:236
-msgid "Connect, get help, or contribute"
-msgstr ""
+
+#~ msgid "Dashboard"
+#~ msgstr "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್"
+
+#~ msgid "Go to Dashboard"
+#~ msgstr "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ಗೆ ಹೋಗಿ"

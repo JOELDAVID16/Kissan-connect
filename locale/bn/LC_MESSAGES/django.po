@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-20 11:04+0530\n"
+"POT-Creation-Date: 2026-02-26 08:24+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,36 +18,97 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\templates\base.html:22
+#: .\templates\ai_price_tool.html:127
+msgid "Back to Orders"
+msgstr ""
+
+#: .\templates\ai_price_tool.html:132
+msgid "Smart Price Predictor"
+msgstr ""
+
+#: .\templates\analytics.html:31
+msgid "Total Orders"
+msgstr ""
+
+#: .\templates\base.html:23
 msgid "Home"
 msgstr ""
 
-#: .\templates\base.html:24
-msgid "Dashboard"
+#: .\templates\base.html:25
+msgid "Orders"
 msgstr ""
 
 #: .\templates\base.html:26
-msgid "Sell Produce"
+#: .\venv\Lib\site-packages\django\contrib\messages\apps.py:16
+msgid "Messages"
 msgstr ""
 
 #: .\templates\base.html:28
-msgid "Marketplace"
+msgid "Sell Produce"
 msgstr ""
 
 #: .\templates\base.html:30
+msgid "Marketplace"
+msgstr ""
+
+#: .\templates\base.html:32
 msgid "Hello"
 msgstr ""
 
-#: .\templates\base.html:31
-msgid "Logout"
-msgstr ""
-
-#: .\templates\base.html:33
+#: .\templates\base.html:35
 msgid "Login"
 msgstr ""
 
-#: .\templates\base.html:34
+#: .\templates\base.html:36
 msgid "Sign Up"
+msgstr ""
+
+#: .\templates\chat_detail.html:17
+msgid "Online"
+msgstr ""
+
+#: .\templates\chat_detail.html:32
+msgid "No messages yet. Say hello!"
+msgstr ""
+
+#: .\templates\chat_detail.html:40
+msgid "Type a message..."
+msgstr ""
+
+#: .\templates\chat_list.html:6
+msgid "Your Messages"
+msgstr ""
+
+#: .\templates\chat_list.html:30
+msgid "No messages yet"
+msgstr ""
+
+#: .\templates\chat_list.html:44
+msgid "You don't have any conversations yet."
+msgstr ""
+
+#: .\templates\chat_list.html:45
+msgid "Browse Marketplace"
+msgstr ""
+
+#: .\templates\dashboard_buyer.html:23
+msgid "My Orders"
+msgstr ""
+
+#: .\templates\dashboard_buyer.html:38
+msgid "Recent Orders"
+msgstr ""
+
+#: .\templates\dashboard_buyer.html:101
+msgid "No orders found."
+msgstr ""
+
+#: .\templates\dashboard_farmer.html:16
+msgid "Received Orders"
+msgstr ""
+
+#: .\templates\dashboard_farmer.html:87
+msgid "No orders received yet."
 msgstr ""
 
 #: .\templates\home.html:8
@@ -61,7 +122,7 @@ msgid ""
 msgstr ""
 
 #: .\templates\home.html:14
-msgid "Go to Dashboard"
+msgid "Go to Orders"
 msgstr ""
 
 #: .\templates\home.html:17
@@ -150,10 +211,6 @@ msgstr ""
 
 #: .\templates\home.html:75
 msgid "Building strong local agricultural networks."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\contrib\messages\apps.py:16
-msgid "Messages"
 msgstr ""
 
 #: .\venv\Lib\site-packages\django\contrib\sitemaps\apps.py:8

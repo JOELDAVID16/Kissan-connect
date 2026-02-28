@@ -1,0 +1,5 @@
+msgid "Orders"
+msgstr "ഓർഡറുകൾ"
+
+msgid "Messages"
+msgstr "സന്ദേശങ്ങൾ"

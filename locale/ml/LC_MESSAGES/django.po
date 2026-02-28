@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-20 11:04+0530\n"
+"POT-Creation-Date: 2026-02-26 08:24+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,37 +18,69 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\templates\base.html:22
-msgid "Home"
-msgstr "ഹോം"
+#: .\templates\ai_price_tool.html:127
+msgid "Back to Orders"
+msgstr "ഓർഡറുകളിലേക്ക് തിരികെ പോകുക"
 
-#: .\templates\base.html:24
-msgid "Dashboard"
-msgstr "ഡാഷ്ബോർഡ്"
+#: .\templates\ai_price_tool.html:132
+#, fuzzy
+#| msgid "Smart Pricing"
+msgid "Smart Price Predictor"
+msgstr "സ്മാർട്ട് പ്രൈസിംഗ്"
+
+#: .\templates\analytics.html:31
+msgid "Total Orders"
+msgstr "മൊത്തം ഓർഡറുകൾ"
+
+#: .\templates\base.html:23
+msgid "Orders"
+msgstr "ഓർഡറുകൾ"
+
+#: .\templates\base.html:25
+msgid "Messages"
+msgstr "സന്ദേശങ്ങൾ"
 
 #: .\templates\base.html:26
+#: .\venv\Lib\site-packages\django\contrib\messages\apps.py:16
+
+#: .\templates\base.html:28
 msgid "Sell Produce"
 msgstr "ഉൽപ്പന്നങ്ങൾ വിൽക്കുക"
 
-#: .\templates\base.html:28
-msgid "Marketplace"
+
+#: .\templates\chat_list.html:6
+msgid "Your Messages"
+msgstr "നിങ്ങളുടെ സന്ദേശങ്ങൾ"
+
+#: .\templates\chat_list.html:44
+msgid "You don't have any conversations yet."
+msgstr ""
+
+#: .\templates\chat_list.html:45
+#, fuzzy
+#| msgid "Marketplace"
+msgid "Browse Marketplace"
 msgstr "ചന്ത"
 
-#: .\templates\base.html:30
-msgid "Hello"
-msgstr "ഹലോ"
+#: .\templates\dashboard_buyer.html:23
+msgid "My Orders"
+msgstr "എന്റെ ഓർഡറുകൾ"
 
-#: .\templates\base.html:31
-msgid "Logout"
-msgstr "ലോഗ് ഔട്ട്"
+#: .\templates\dashboard_buyer.html:38
+msgid "Recent Orders"
+msgstr "സമീപകാല ഓർഡറുകൾ"
 
-#: .\templates\base.html:33
-msgid "Login"
-msgstr "ലോഗിൻ"
+#: .\templates\dashboard_buyer.html:101
+msgid "No orders found."
+msgstr ""
 
-#: .\templates\base.html:34
-msgid "Sign Up"
-msgstr "സൈൻ അപ്പ്"
+#: .\templates\dashboard_farmer.html:16
+msgid "Received Orders"
+msgstr "ലഭിച്ച ഓർഡറുകൾ"
+
+#: .\templates\dashboard_farmer.html:87
+msgid "No orders received yet."
+msgstr ""
 
 #: .\templates\home.html:8
 msgid "Connect. Bid. Prosper."
@@ -58,11 +90,13 @@ msgstr "ബന്ധിപ്പിക്കുക. ലேലം വിളിക
 msgid ""
 "Your direct farm-fresh produce marketplace. Fair prices, empowered farmers, "
 "and sustainable communities."
-msgstr "നിങ്ങളുടെ നേരിട്ടുള്ള ഫാം-ഫ്രഷ് ഉൽപ്പന്ന വിപണി. ന്യായമായ വിലകൾ, ശാക്തീകരിക്കപ്പെട്ട കർഷകർ, സുസ്ഥിരമായ കമ്മ്യൂണിറ്റികൾ."
+msgstr ""
+"നിങ്ങളുടെ നേരിട്ടുള്ള ഫാം-ഫ്രഷ് ഉൽപ്പന്ന വിപണി. ന്യായമായ വിലകൾ, ശാക്തീകരിക്കപ്പെട്ട കർഷകർ, "
+"സുസ്ഥിരമായ കമ്മ്യൂണിറ്റികൾ."
 
 #: .\templates\home.html:14
-msgid "Go to Dashboard"
-msgstr "ഡാഷ്ബോർഡിലേക്ക് പോകുക"
+msgid "Go to Orders"
+msgstr "ഓർഡറുകളിലേക്ക് പോകുക"
 
 #: .\templates\home.html:17
 msgid "I'm a Farmer"
@@ -80,7 +114,9 @@ msgstr "കർഷകർക്കായി"
 msgid ""
 "List your harvest, get AI-powered price suggestions, and connect directly "
 "with buyers. No middlemen."
-msgstr "നിങ്ങളുടെ വിളവെടുപ്പ് ലിസ്റ്റ് ചെയ്യുക, AI- അധിഷ്ഠിത വില നിർദ്ദേശങ്ങൾ നേടുക, വാങ്ങുന്നവരുമായി നേരിട്ട് ബന്ധപ്പെടുക. ഇടനിലക്കാരില്ല."
+msgstr ""
+"നിങ്ങളുടെ വിളവെടുപ്പ് ലിസ്റ്റ് ചെയ്യുക, AI- അധിഷ്ഠിത വില നിർദ്ദേശങ്ങൾ നേടുക, വാങ്ങുന്നവരുമായി "
+"നേരിട്ട് ബന്ധപ്പെടുക. ഇടനിലക്കാരില്ല."
 
 #: .\templates\home.html:32
 msgid "Instant Listing"
@@ -106,7 +142,9 @@ msgstr "വാങ്ങുന്നവർക്കായി"
 msgid ""
 "Browse fresh local produce, view demand trends, and buy directly from the "
 "source."
-msgstr "പുതിയ പ്രാദേശിക ഉൽപ്പന്നങ്ങൾ ബ്രൗസ് ചെയ്യുക, ഡിമാൻഡ് ട്രെൻഡുകൾ കാണുക, ഉറവിടത്തിൽ നിന്ന് നേരിട്ട് വാങ്ങുക."
+msgstr ""
+"പുതിയ പ്രാദേശിക ഉൽപ്പന്നങ്ങൾ ബ്രൗസ് ചെയ്യുക, ഡിമാൻഡ് ട്രെൻഡുകൾ കാണുക, ഉറവിടത്തിൽ നിന്ന് "
+"നേരിട്ട് വാങ്ങുക."
 
 #: .\templates\home.html:48
 msgid "Farm Fresh"
@@ -151,10 +189,6 @@ msgstr "കമ്മ്യൂണിറ്റി"
 #: .\templates\home.html:75
 msgid "Building strong local agricultural networks."
 msgstr "ശക്തമായ പ്രാദേശിക കാർഷിക ശൃംഖലകൾ കെട്ടിപ്പടുക്കുക."
-
-#: .\venv\Lib\site-packages\django\contrib\messages\apps.py:16
-msgid "Messages"
-msgstr ""
 
 #: .\venv\Lib\site-packages\django\contrib\sitemaps\apps.py:8
 msgid "Site Maps"
@@ -1392,7 +1426,16 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:235
 msgid "Django Community"
 msgstr ""
+#: .\templates\base.html:23
+msgid "Home"
+msgstr "ഹോം"
 
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:236
-msgid "Connect, get help, or contribute"
-msgstr ""
+
+#~ msgid "Dashboard"
+#~ msgstr "ഡാഷ്ബോർഡ്"
+
+#~ msgid "Logout"
+#~ msgstr "ലോഗ് ഔട്ട്"
+
+#~ msgid "Go to Dashboard"
+#~ msgstr "ഡാഷ്ബോർഡിലേക്ക് പോകുക"

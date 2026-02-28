@@ -68,7 +68,9 @@ translations = {
         "Sign Up": "பதிவு செய்",
         "I'm a Farmer": "நான் ஒரு விவசாயி",
         "I'm a Buyer": "நான் ஒரு வாங்குபவர்",
-        "Go to Dashboard": "டாஷ்போர்டுக்குச் செல்லவும்"
+        "Go to Dashboard": "டாஷ்போர்டுக்குச் செல்லவும்",
+        "Go to Orders": "ஆணைகளுக்குச் செல்லவும்",
+        "Your Messages": "உங்கள் செய்திகள்"
     },
     'kn': {
         "Connect. Bid. Prosper.": "ಸಂಪರ್ಕಿಸಿ. ಬಿಡ್ ಮಾಡಿ. ಸಮೃದ್ಧರಾಗಿ.",
@@ -102,7 +104,49 @@ translations = {
         "Sign Up": "ಸೈನ್ ಅಪ್",
         "I'm a Farmer": "ನಾನು ಒಬ್ಬ ರೈತ",
         "I'm a Buyer": "ನಾನು ಒಬ್ಬ ಖರೀದಿದಾರ",
-        "Go to Dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ಗೆ ಹೋಗಿ"
+        "Go to Dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ಗೆ ಹೋಗಿ",
+        "Go to Orders": "ಆದೇಶಗಳಿಗೆ ಹೋಗಿ",
+        "Your Messages": "ನಿಮ್ಮ ಸಂದೇಶಗಳು"
+    },
+    'ml': {
+        "Connect. Bid. Prosper.": "ബന്ധിപ്പിക്കുക. ലേലം വിളിക്കുക. ഐശ്വര്യപ്പെടുക.",
+        "Your direct farm-fresh produce marketplace. Fair prices, empowered farmers, and sustainable communities.": "നിങ്ങളുടെ നേരിട്ടുള്ള ഫാം-ഫ്രഷ് ഉൽപ്പന്ന വിപണി. ന്യായമായ വിലകൾ, ശാക്തീകരിക്കപ്പെട്ട കർഷകർ, സുസ്ഥിരമായ കമ്മ്യൂണിറ്റികൾ.",
+        "For Farmers": "കർഷകർക്കായി",
+        "List your harvest, get AI-powered price suggestions, and connect directly with buyers. No middlemen.": "നിങ്ങളുടെ വിളവെടുപ്പ് ലിസ്റ്റ് ചെയ്യുക, AI- അധിഷ്ഠിത വില നിർദ്ദേശങ്ങൾ നേടുക, വാങ്ങുന്നവരുമായി നേരിട്ട് ബന്ധപ്പെടുക. ഇടനിലക്കാരില്ല.",
+        "Instant Listing": "തൽക്ഷണ ലിസ്റ്റിംഗ്",
+        "Smart Pricing": "സ്മാർട്ട് പ്രൈസിംഗ്",
+        "Secure Orders": "സുരക്ഷിത ഓർഡറുകൾ",
+        "Start Selling": "വിൽക്കാൻ തുടങ്ങുക",
+        "For Buyers": "വാങ്ങുന്നവർക്കായി",
+        "Browse fresh local produce, view demand trends, and buy directly from the source.": "പുതിയ പ്രാദേശിക ഉൽപ്പന്നങ്ങൾ ബ്രൗസ് ചെയ്യുക, ഡിമാൻഡ് ട്രെൻഡുകൾ കാണുക, ഉറവിടത്തിൽ നിന്ന് നേരിട്ട് വാങ്ങുക.",
+        "Farm Fresh": "ഫാം ഫ്രഷ്",
+        "Transparent Pricing": "സുതാര്യമായ വിലനിർണ്ണയം",
+        "Direct Contact": "നേരിട്ടുള്ള ബന്ധം",
+        "Start Buying": "വാങ്ങാൻ തുടങ്ങുക",
+        "Why Kissan Connect?": "എന്തുകൊണ്ട് കിസാൻ കണക്ട്?",
+        "Fair Trade": "ന്യായമായ വ്യാപാരം",
+        "Farmers get better rates, buyers get better prices.": "കർഷകർക്ക് മികച്ച നിരക്കും വാങ്ങുന്നവർക്ക് മികച്ച വിലയും ലഭിക്കും.",
+        "Smart Tech": "സ്മാർട്ട് ടെക്നീക്ക്",
+        "AI-driven insights for smarter business decisions.": "മികച്ച ബിസിനസ്സ് തീരുമാനങ്ങൾക്കായി AI-അധിഷ്ഠിത ഉൾക്കാഴ്ചകൾ.",
+        "Community": "കമ്മ്യൂണിറ്റി",
+        "Building strong local agricultural networks.": "ശക്തമായ പ്രാദേശിക കാർഷിക ശൃംഖലകൾ കെട്ടിപ്പടുക്കുക.",
+        "Home": "ഹോം",
+        "Dashboard": "ഡാഷ്‌ബോർഡ്",
+        "Sell Produce": "ഉൽപ്പന്നങ്ങൾ വിൽക്കുക",
+        "Marketplace": "ചന്ത",
+        "Hello": "ഹലോ",
+        "Logout": "ലോഗ് ഔട്ട്",
+        "Login": "ലോഗിൻ",
+        "Sign Up": "സൈൻ അപ്പ്",
+        "I'm a Farmer": "ഞാൻ ഒരു കർഷകനാണ്",
+        "I'm a Buyer": "ഞാൻ ഒരു വാങ്ങുന്നയാളാണ്",
+        "Go to Dashboard": "ഡാഷ്‌ബോർഡിലേക്ക് പോകുക",
+        "Go to Orders": "ഓർഡറുകളിലേക്ക് പോകുക",
+        "Your Messages": "നിങ്ങളുടെ സന്ദേശങ്ങൾ",
+        "My Orders": "എന്റെ ഓർഡറുകൾ",
+        "Recent Orders": "സമീപകാല ഓർഡറുകൾ",
+        "Received Orders": "ലഭിച്ച ഓർഡറുകൾ",
+        "Total Orders": "മൊത്തം ഓർഡറുകൾ"
     }
 }
 

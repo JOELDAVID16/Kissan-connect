@@ -1,0 +1,5 @@
+msgid "Orders"
+msgstr "অর্ডারসমূহ"
+
+msgid "Messages"
+msgstr "বার্তা"
