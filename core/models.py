@@ -11,6 +11,13 @@ class Profile(models.Model):
         role = "Farmer" if self.is_farmer else "Buyer"
         return f"{self.user.username} ({role})"
 
+    def average_rating(self):
+        products = self.user.products.all()
+        ratings = [p.average_rating() for p in products if p.review_count() > 0]
+        if not ratings:
+            return 0
+        return sum(ratings) / len(ratings)
+
 class Product(models.Model):
     QUALITY_CHOICES = [
         ('Low', 'Low'),
@@ -41,6 +48,26 @@ class Product(models.Model):
 
     def get_current_highest_bid(self):
         return self.bids.order_by('-amount').first()
+
+    def average_rating(self):
+        avg = self.reviews.aggregate(models.Avg('rating'))['rating__avg']
+        return avg if avg else 0
+
+    def review_count(self):
+        return self.reviews.count()
+
+class Review(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
+    rating = models.IntegerField(default=5)
+    comment = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review for {self.product.name} by {self.buyer.username}"
+
+    class Meta:
+        ordering = ['-created_at']
 
 class Bid(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='bids')

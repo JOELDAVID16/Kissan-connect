@@ -10,6 +10,111 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Logout Modal Styles (Internal for immediate application) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            animation: fadeInModal 0.3s ease-out;
+        }
+
+        @keyframes fadeInModal {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.9);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-icon {
+            font-size: 3rem;
+            color: #4CAF50;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #111827;
+        }
+
+        .modal-text {
+            color: #6B7280;
+            margin-bottom: 2rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-cancel {
+            background: #E5E7EB;
+            color: #374151;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            background: #D1D5DB;
+        }
+
+        .btn-logout {
+            background: linear-gradient(135deg, #ff2600 0%, #ff003c 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-logout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 75, 43, 0.3);
+            color: white;
+        }
+    </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {% block head %}{% endblock %}
 </head>
@@ -30,7 +135,7 @@
             <a href="{% url 'product_list' %}">{% trans "Marketplace" %}</a>
             {% endif %}
             <span class="user-greeting">{% trans "Hello" %}, {{ user.username }}</span>
-            <a href="{% url 'logout' %}" class="btn-nav">Log out</a>
+            <a href="{% url 'logout' %}" class="btn-nav" id="logout-link">Log out</a>
             {% else %}
             <a href="{% url 'login' %}">{% trans "Login" %}</a>
             <a href="{% url 'register' %}" class="btn-nav">{% trans "Sign Up" %}</a>
@@ -44,8 +149,8 @@
                     {% get_available_languages as LANGUAGES %}
                     {% get_language_info_list for LANGUAGES as languages %}
                     {% for language in languages %}
-                    <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
-    {{ language.name }}
+                  <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                  {{ language.name }}
 </option>
 
 
@@ -71,7 +176,47 @@
     <footer style="text-align: center; padding: 2rem; color: #6B7280;">
         <p>&copy; 2026 Kissan Connect. Empowering Farmers.</p>
     </footer>
+    <!-- Logout Confirmation Modal -->
+    <div id="logout-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-sign-out-alt"></i>
+            </div>
+            <h3 class="modal-title">Ready to Leave?</h3>
+            <p class="modal-text">Are you sure you want to log out of Kissan Connect?</p>
+            <div class="modal-actions">
+                <button class="btn-cancel" id="cancel-logout">Cancel</button>
+                <a href="{% url 'logout' %}" class="btn-logout">Yes, Log out</a>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Logout Modal Logic
+        const logoutLink = document.getElementById('logout-link');
+        const logoutModal = document.getElementById('logout-modal');
+        const cancelLogout = document.getElementById('cancel-logout');
+
+        if (logoutLink) {
+            logoutLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                logoutModal.classList.add('active');
+            });
+        }
+
+        if (cancelLogout) {
+            cancelLogout.addEventListener('click', function () {
+                logoutModal.classList.remove('active');
+            });
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function (e) {
+            if (e.target === logoutModal) {
+                logoutModal.classList.remove('active');
+            }
+        });
+
         function updateAllCountdowns() {
             document.querySelectorAll('.bidding-countdown').forEach(function (el) {
                 const endTimestamp = el.getAttribute('data-endtime');

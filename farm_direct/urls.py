@@ -47,6 +47,7 @@ urlpatterns += i18n_patterns(
     path('product/<int:pk>/close-bidding/', views.close_bidding, name='close_bidding'),
     path('product/<int:pk>/delete/', views.delete_product, name='delete_product'),
     path('ai-price-tool/', views.ai_price_tool, name='ai_price_tool'),
+    path('submit-review/', views.submit_review, name='submit_review'),
 )
 
 if settings.DEBUG:

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
 <div style="display: flex; gap: 30px;">
     <div style="flex: 1;">
@@ -10,6 +11,18 @@
     </div>
     <div style="flex: 1;">
         <h2>{{ product.name }}</h2>
+
+        <!-- Average Rating -->
+        <div class="star-rating" style="margin-bottom: 1rem;">
+            {% with avg=product.average_rating %}
+            {% for i in "12345" %}
+            <i class="fas fa-star star {% if avg >= forloop.counter|add:0 %}filled{% endif %}"></i>
+            {% endfor %}
+            <span class="rating-value">{{ avg|floatformat:1 }}</span>
+            <span class="review-count">({{ product.review_count }} {% trans "reviews" %})</span>
+            {% endwith %}
+        </div>
+
         {% if product.variety %}
         <p style="color: var(--text-light); font-size: 1rem; margin-bottom: 0.5rem;">
             <strong>Variety:</strong> {{ product.variety }}
@@ -59,5 +72,70 @@
         {% endif %}
         <a href="{% url 'start_chat' product.seller.id %}" class="btn btn-secondary">Chat with Farmer</a>
     </div>
+</div>
+
+<!-- Reviews Section -->
+<div class="reviews-section" id="reviews">
+    <h3 style="margin-bottom: 1.5rem;">{% trans "Customer Reviews" %}</h3>
+
+    {% if can_review %}
+    <div class="card" style="margin-bottom: 2rem; background: #f9fafb;">
+        <h4 style="margin-bottom: 1rem;">{% trans "Write a Review" %}</h4>
+        <form action="{% url 'submit_review' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+
+            <div style="margin-bottom: 1.5rem;">
+                <label>Rating</label>
+                <div class="star-input">
+                    <input type="radio" name="rating" id="star5" value="5" required><label for="star5"><i
+                            class="fas fa-star"></i></label>
+                    <input type="radio" name="rating" id="star4" value="4"><label for="star4"><i
+                            class="fas fa-star"></i></label>
+                    <input type="radio" name="rating" id="star3" value="3"><label for="star3"><i
+                            class="fas fa-star"></i></label>
+                    <input type="radio" name="rating" id="star2" value="2"><label for="star2"><i
+                            class="fas fa-star"></i></label>
+                    <input type="radio" name="rating" id="star1" value="1"><label for="star1"><i
+                            class="fas fa-star"></i></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>{% trans "Your Comment (Optional)" %}</label>
+                <textarea name="comment" rows="3" placeholder="How was the produce?"></textarea>
+            </div>
+
+            <button type="submit" class="btn">{% trans "Submit Review" %}</button>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if reviews %}
+    <div class="reviews-list">
+        {% for review in reviews %}
+        <div class="review-card">
+            <div class="review-header">
+                <div class="review-user">
+                    <i class="fas fa-user-circle" style="color: #9CA3AF;"></i>
+                    {{ review.buyer.username }}
+                </div>
+                <div class="review-date">
+                    {{ review.created_at|date:"M d, Y" }}
+                </div>
+            </div>
+            <div class="star-rating" style="margin-bottom: 0.5rem;">
+                {% for i in "12345" %}
+                <i class="fas fa-star star {% if review.rating >= forloop.counter|add:0 %}filled{% endif %}"
+                    style="font-size: 0.85rem;"></i>
+                {% endfor %}
+            </div>
+            <p class="review-comment">{{ review.comment }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p style="color: var(--text-light); font-style: italic;">{% trans "No reviews yet for this product." %}</p>
+    {% endif %}
 </div>
 {% endblock %}

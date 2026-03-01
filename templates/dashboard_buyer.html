@@ -86,6 +86,15 @@
                             {% endif %}
                             <strong>Farmer Email:</strong> {{ o.product.seller.email }}<br>
                             <strong>Phone:</strong> {{ o.product.seller.profile.phone_number|default:"N/A" }}
+
+                            {% if o.status == 'Accepted' or o.status == 'Completed' %}
+                            <div style="margin-top: 10px;">
+                                <a href="{% url 'product_detail' o.product.id %}#reviews" class="btn"
+                                    style="padding: 0.3rem 0.6rem; font-size: 0.75rem; background: #fbbf24; color: #78350f;">
+                                    <i class="fas fa-star"></i> {% trans "Rate Product" %}
+                                </a>
+                            </div>
+                            {% endif %}
                             {% else %}
                             <span style="color: var(--text-light); font-size: 0.85rem; font-style: italic;">Contact
                                 details hidden until accepted</span>

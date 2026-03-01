@@ -5,7 +5,7 @@
     <h2><i class="fas fa-chart-line" style="color: var(--primary-color);"></i> Business Analytics</h2>
     <a href="{% url 'dashboard' %}" class="btn-secondary"
         style="padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none;">
-        <i class="fas fa-arrow-left"></i> Back to Dashboard
+        <i class="fas fa-arrow-left"></i> Back to Orders
     </a>
 </div>
 
@@ -53,6 +53,23 @@
         <p style="font-size: 0.9rem; color: var(--text-light);">Products Listed</p>
         <h3 style="font-size: 2rem; margin: 0.25rem 0; color: var(--primary-dark); font-weight: 700;">{{total_products}}
         </h3>
+    </div>
+
+    <!-- Rating Card -->
+    <div class="card" style="padding: 1.5rem;">
+        <div
+            style="background: rgba(251, 191, 36, 0.1); color: #fbbf24; width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+            <i class="fas fa-star" style="font-size: 1.2rem;"></i>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-light);">Overall Rating</p>
+        <div style="display: flex; align-items: baseline; gap: 0.5rem;">
+            <h3 style="font-size: 2rem; margin: 0.25rem 0; color: var(--primary-dark); font-weight: 700;">
+    {{ farmer_rating|default:0|floatformat:1 }}
+</h3>
+            <div class="star-rating">
+                <i class="fas fa-star star filled" style="font-size: 1rem;"></i>
+            </div>
+        </div>
     </div>
 </div>
 

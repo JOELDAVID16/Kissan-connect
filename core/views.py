@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout, get_user_model
 User = get_user_model()
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
-from .models import Product, Order, Profile, Conversation, Message
+from .models import Product, Order, Profile, Conversation, Message, Review
 from .ai_utils import get_price_suggestion, get_demand_indicator
 from django.contrib import messages
 from decimal import Decimal
@@ -163,7 +163,23 @@ def product_list(request):
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
     demand = get_demand_indicator(product.name)
-    return render(request, 'product_detail.html', {'product': product, 'demand': demand})
+    reviews = product.reviews.all()
+    
+    # Check if current user can review (has purchased the product)
+    can_review = False
+    if request.user.is_authenticated:
+        can_review = Order.objects.filter(
+            buyer=request.user, 
+            product=product, 
+            status__in=['Accepted', 'Completed']
+        ).exists() and not Review.objects.filter(buyer=request.user, product=product).exists()
+        
+    return render(request, 'product_detail.html', {
+        'product': product, 
+        'demand': demand,
+        'reviews': reviews,
+        'can_review': can_review
+    })
 
 @login_required
 def order_product(request, pk):
@@ -265,7 +281,8 @@ def analytics(request):
         'avg_order_value': avg_order_value,
         'total_products': total_products_listed,
         'chart1': chart1,
-        'chart2': chart2
+        'chart2': chart2,
+        'farmer_rating': request.user.profile.average_rating()
     })
 
 @login_required
@@ -399,3 +416,34 @@ def ai_price_tool(request):
         'product_name': product_name,
         'quality': quality
     })
+@login_required
+def submit_review(request):
+    if request.method == 'POST':
+        product_id = request.POST.get('product_id')
+        rating = request.POST.get('rating')
+        comment = request.POST.get('comment', '')
+        
+        product = get_object_or_404(Product, pk=product_id)
+        
+        # Security check: did they actually buy it?
+        has_purchased = Order.objects.filter(
+            buyer=request.user, 
+            product=product, 
+            status__in=['Accepted', 'Completed']
+        ).exists()
+        
+        if not has_purchased:
+            messages.error(request, "You can only review products you have purchased.")
+        elif Review.objects.filter(buyer=request.user, product=product).exists():
+            messages.error(request, "You have already reviewed this product.")
+        else:
+            Review.objects.create(
+                product=product,
+                buyer=request.user,
+                rating=int(rating),
+                comment=comment
+            )
+            messages.success(request, "Thank you for your review!")
+            
+        return redirect('product_detail', pk=product_id)
+    return redirect('dashboard')

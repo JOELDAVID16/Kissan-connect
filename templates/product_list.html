@@ -38,6 +38,15 @@
 
         <div style="padding: 1.5rem; flex: 1; display: flex; flex-direction: column;">
             <h3 style="margin-bottom: 0.5rem;">{{ p.name }}</h3>
+            <div class="star-rating" style="margin-bottom: 0.5rem;">
+                {% with avg=p.average_rating %}
+                {% for i in "12345" %}
+                <i class="fas fa-star star {% if avg >= forloop.counter|add:0 %}filled{% endif %}"
+                    style="font-size: 0.8rem;"></i>
+                {% endfor %}
+                <span class="review-count">({{ p.review_count }})</span>
+                {% endwith %}
+            </div>
             <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem; flex: 1;">
                 {{ p.description|truncatechars:60 }}
             </p>
